@@ -22,6 +22,6 @@
     <li>yarn add @types/styled-components --save -D</li>
     <li>yarn add @material-ui/core</li>
     
-   
+   <li>yarn add react-dotenv</li>
 
 </ol>

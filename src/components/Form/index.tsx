@@ -4,7 +4,7 @@ import api from "../../server/api"
 
 interface IDate {
 
-    name: string;
+    nome: string;
     dataNascimento: string;
     certidaoNascimento?: string;
     corRaca: string;
@@ -60,27 +60,29 @@ interface IDate {
 
 const Form: React.FC = () => {
 
-    const [date, setDate] = useState<IDate>({} as IDate)
-    const hadleSumbmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const [data, setDate] = useState<IDate>({} as IDate)
+    // const hadleSumbmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault()
+    //     // api.get("/",).then(response =>{
+    //     //     console.log(response.data)
 
+    //     // }
 
-        // api.post("/", {
-        //     "data": {"nome": "jeovane", "idade": 25}
-        // }).then(
-        api.get("/",).then(response =>{
-            console.log(response.data)
-
-        }
+    //     api.post("/", data).then(()=>{
+            
+    //             console.log(data)
+           
+    //     }
+            
             
 
-        ).catch((err) => {
-            {
-                console.log("ddd")
-            }
-        })
+    //     ).catch((err) => {
+    //         {
+    //             console.log(data)
+    //         }
+    //     })
 
-    }, [date])
+    // }, [data])
 
     return (
         <div>
@@ -89,30 +91,20 @@ const Form: React.FC = () => {
             
             <div className="card">
                 <h5>Cadastres</h5>
-                <form onSubmit={hadleSumbmit}>
+                {/* onSubmit={hadleSumbmit} */}
+                <form >
 
-                    {/* <input
+                    <input
                         type="text"
                         placeholder="Infomer seu nome"
-                        onChange={e => setDate({ ...data, name: e.target.value })}
-                    /> */}
-
-
-                    {/* <input
-                        type="email"
-                        placeholder="Informe seus email"
-                        onChange={e => setDate({ ...data, email: e.target.value })}
-                    /> */}
-                    {/* <input
-                        type="password"
-                        placeholder="Infomer seu Senha"
-                        onChange={e => setDate({ ...data, senha: e.target.value })}
-                    /> */}
+                        onChange={e => setDate({ ...data, nome: e.target.value })}
+                    />
+                    
 
 
                     <button type="submit" value="Cadastra">Cadastra</button>
                 </form>
-                {/* <Link to={"/signin"}>Logar</Link> */}
+               
             </div>
         </div>
     )
