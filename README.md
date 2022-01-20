@@ -23,5 +23,10 @@
     <li>yarn add @material-ui/core</li>
     
    <li>yarn add react-dotenv</li>
+   <li>yarn add reactstrap react react-dom</li>
+   <li>yarn add bootstrap --save</li>
+   <li>Import no seu arquivo..
+      <p>import 'bootstrap/dist/css/bootstrap.min.css';</p>
+   </li>
 
 </ol>
