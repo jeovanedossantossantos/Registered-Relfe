@@ -1,7 +1,7 @@
 import Form from "./components/Form";
 import Header from "./components/Header";
 import Formulario from "./views/Formulario"
-
+import EditForm from "./views/EditForm"
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       App
       <Form></Form>
       <Formulario></Formulario>
+      <EditForm></EditForm>
     </div>
   );
 }
