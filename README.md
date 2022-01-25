@@ -33,5 +33,6 @@
    </li>
 
    <li>yarn add react-router-dom</li>
+   <li>yarn add @types/jquery --save</li>
 
 </ol>

@@ -7,20 +7,21 @@ import { Container } from "./style";
 interface IDate {
 
 
-    data_cadastro: {
-        dia: number,
-        mes: number,
-        ano: number
-    };
+    // data_cadastro: {
+    //     dia: number,
+    //     mes: number,
+    //     ano: number
+    // };
     nome: string;
     periodo: string;
-    grupo: number;
+    // grupo: number;
     escola: string;
-    cras: string;
+    // cras: string;
     dataNascimento: string;
     certidaoNascimento?: string;
     corRaca: string;
     cpf: string;
+    rg?:string;
     sexo: string;
     nis?: string;
     endereco: string;
@@ -75,26 +76,27 @@ const Form: React.FC = () => {
 
     const [date, setDate] = useState<IDate>({} as IDate)
 
-    useEffect(() => {
-        const data = new Date();
-        let ca = []
-        ca.push({
-            dia: data.getDate(),
-            mes: data.getMonth(),
-            ano: data.getFullYear()
-        })
-        // alert(ca[0].ano)
-        setDate({ ...date, data_cadastro: ca[0] })
+    // useEffect(() => {
+    //     const data = new Date();
+    //     let ca = []
+    //     ca.push({
+    //         dia: data.getDate(),
+    //         mes: data.getMonth(),
+    //         ano: data.getFullYear()
+    //     })
+    //     // alert(ca[0].ano)
+    //     setDate({ ...date, data_cadastro: ca[0] })
 
 
-    }, [])
-    console.log(date.data_cadastro)
+    // }, [])
+    // console.log(date.data_cadastro)
     const hadleSumbmit = useCallback((e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         // api.get("/",).then(response =>{
         //     console.log(response.data)
 
         // }
+        console.log("ok")
 
         api.post("/", date).then(() => {
 
@@ -141,51 +143,65 @@ const Form: React.FC = () => {
                         <legend>Detalhes</legend>
                         <div className="mb-3">
                             <label className="form-label" htmlFor="nome">Nome:</label>
-                            <input className="form-control" type="text" name="nome" id="nome" />
+                            <input className="form-control" type="text" name="nome" id="nome"
+                            placeholder="Nome da criança"
+                             onChange={e => setDate({ ...date, nome: e.target.value })} />
                         </div>
                         <div style={{display:"flex"}}>
                             <div className="col-md-8 m-1">
                                 <label className="form-label" htmlFor="escola">Escola:</label>
-                                <input className="form-control" type="text" name="escola" id="escola" />
+                                <input className="form-control" type="text" name="escola" id="escola"
+                                placeholder="Nome da escola"
+                                onChange={e => setDate({ ...date, escola: e.target.value })} />
                             </div>
                             <div className="col-md-3 m-1">
                                 <label className="form-label" htmlFor="periodo">Periodo:</label>
-                                <input className="form-control" type="number" name="periodo" id="periodo" />
+                                <input className="form-control" type="number" name="periodo" id="periodo" 
+                                placeholder="Periodo"
+                                onChange={e => setDate({ ...date, periodo: e.target.value })}/>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-2">
                                 <label htmlFor="dataNascimento">Data de Nascimento:</label>
-                                <input type="number" name="dataNascimento" id="dataNascimento" />
+                                <input type="number" name="dataNascimento" id="dataNascimento" placeholder="Data de Nascimento"
+                                onChange={e => setDate({ ...date, dataNascimento: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="certidao">Certidão de Nascimento:</label>
-                                <input type="number" name="certidao" id="certidao" />
+                                <input type="number" name="certidao" id="certidao" placeholder="Certidão de Nascimento" 
+                                onChange={e => setDate({ ...date, certidaoNascimento: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="raça">Cor/Raça:</label>
-                                <input type="text" name="raça" id="raça" />
+                                <input type="text" name="raça" id="raça" placeholder="Cor/Raça"
+                                onChange={e => setDate({ ...date, corRaca: e.target.value })} />
                             </div>
                             <div className="col-md-2">
 
                                 <label htmlFor="CPFbeneficiario">CPF Beneficiário:</label>
-                                <input type="number" name="CPFbeneficiario" id="CPFbeneficiario" />
+                                <input type="number" name="CPFbeneficiario" id="CPFbeneficiario" 
+                                placeholder="CPF"
+                                onChange={e => setDate({ ...date, cpf: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="RGbeneficiario">RG Beneficiário:</label>
-                                <input type="number" name="RGbeneficiario" id="RGbeneficiario" />
+                                <input type="number" name="RGbeneficiario" id="RGbeneficiario" placeholder="RG"
+                                onChange={e => setDate({ ...date, rg: e.target.value })} />
                             </div>
                             <div className="col-md-2">
                                 <label htmlFor="sexo">Sexo:</label><br />
-                                <input type="text" name="sexo" id="sexo" />
+                                <input type="text" name="sexo" id="sexo"
+                                onChange={e => setDate({ ...date, sexo: e.target.value })} />
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="nis">NIS(CAD ÚNICO)</label>
-                                <input type="number" name="nis" id="nis" />
+                                <input type="number" name="nis" id="nis" 
+                                onChange={e => setDate({ ...date, nis: e.target.value })}/>
                             </div>
                         </div>
 
@@ -202,12 +218,14 @@ const Form: React.FC = () => {
                                     maxWidth: 480,
                                     minWidth: 200
 
-                                }} type="text" name="endereco" id="endereco" />
+                                }} type="text" name="endereco" id="endereco" 
+                                onChange={e => setDate({ ...date, nis: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="numeroEndereco">Nº):</label><br />
-                                <input type="number" name="numeroEndereco" id="numeroEndereco" />
+                                <input type="number" name="numeroEndereco" id="numeroEndereco" 
+                                onChange={e => setDate({ ...date, numero: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2" style={{
@@ -220,33 +238,39 @@ const Form: React.FC = () => {
                                     maxWidth: 480,
                                     minWidth: 200
 
-                                }} type="text" name="bairro" id="bairro" />
+                                }} type="text" name="bairro" id="bairro" 
+                                onChange={e => setDate({ ...date, bairro: e.target.value })}/>
                             </div >
 
                             <div className="col-md-2">
                                 <label htmlFor="cidade">Cidade:</label>
-                                <input type="text" name="cidade" id="cidade" />
+                                <input type="text" name="cidade" id="cidade" 
+                                onChange={e => setDate({ ...date, cidade: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="cep">CEP:</label> <br />
-                                <input type="number" name="cep" id="cep" />
+                                <input type="number" name="cep" id="cep" 
+                                onChange={e => setDate({ ...date, cep: e.target.value })}/>
                             </div>
 
                             <div className="col-md-3">
 
                                 <label htmlFor="referencia">Ponto de Referência:</label><br />
-                                <input className="col-md-12" type="text" name="referencia" id="referencia" />
+                                <input className="col-md-12" type="text" name="referencia" id="referencia" 
+                                onChange={e => setDate({ ...date, pontoReferencia: e.target.value })}/>
 
                             </div>
                             <div className="col-md-2">
                                 <label htmlFor="telContato">Telefone para Contato:</label>
-                                <input type="text" name="telContato" id="telContato" />
+                                <input type="text" name="telContato" id="telContato" 
+                                onChange={e => setDate({ ...date, telefone: e.target.value })}/>
                             </div>
 
                             <div className="col-md-2">
                                 <label htmlFor="telContato2">Telefone para Contato:</label>
-                                <input type="text" name="telContato2" id="telContato2" />
+                                <input type="text" name="telContato2" id="telContato2" 
+                                 onChange={e => setDate({ ...date, telefone2: e.target.value })}/>
                             </div>
 
 
@@ -258,28 +282,35 @@ const Form: React.FC = () => {
                         <label htmlFor="nomePai">Nome do Pai:</label> */}
                         <div className="mb-3">
                             <label className="form-label" htmlFor="nomePai">Dados do Pai/Padastro</label>
-                            <input className="form-control" type="text" name="nomePai" id="nomePai" placeholder="Nome do pai" />
+                            <input className="form-control" type="text" name="nomePai" id="nomePai" placeholder="Nome do pai" 
+                             onChange={e => setDate({ ...date, nisPai: e.target.value })}/>
                         </div>
-                        <input type="text" name="nomePai" id="nomePai" />
                         <label htmlFor="telPai">Telefone:</label>
-                        <input type="text" name="telPai" id="telPai" />
+                        <input type="text" name="telPai" id="telPai" 
+                        onChange={e => setDate({ ...date, telfonePai: e.target.value })}/>
                         <label htmlFor="CPFpai">CPF:</label>
-                        <input type="text" name="CPFpai" id="CPFpai" />
+                        <input type="text" name="CPFpai" id="CPFpai" 
+                        onChange={e => setDate({ ...date, cpfPai: e.target.value })}/>
                         <label htmlFor="RGpai">RG:</label>
-                        <input type="text" name="RGpai" id="RGpai" />
+                        <input type="text" name="RGpai" id="RGpai" 
+                        onChange={e => setDate({ ...date, rgPai: e.target.value })}/>
 
                     </fieldset>
 
                     <fieldset>
                         <legend>Dados da Mãe/Madastra</legend>
                         <label htmlFor="nomeMae">Nome:</label>
-                        <input type="text" name="nomeMae" id="nomeMae" />
+                        <input type="text" name="nomeMae" id="nomeMae" 
+                        onChange={e => setDate({ ...date, nomeMae: e.target.value })}/>
                         <label htmlFor="telMae">Telefone da:</label>
-                        <input type="text" name="telMae" id="telMae" />
+                        <input type="text" name="telMae" id="telMae" 
+                        onChange={e => setDate({ ...date, telfoneMae: e.target.value })}/>
                         <label htmlFor="CPFmae">CPF:</label>
-                        <input type="text" name="CPFmae" id="CPFmae" />
+                        <input type="text" name="CPFmae" id="CPFmae" 
+                        onChange={e => setDate({ ...date, cpfMae: e.target.value })}/>
                         <label htmlFor="RGmae">RG:</label>
-                        <input type="text" name="RGmae" id="RGmae" />
+                        <input type="text" name="RGmae" id="RGmae" 
+                        onChange={e => setDate({ ...date, rgMae: e.target.value })}/>
 
                     </fieldset>
 
@@ -346,12 +377,13 @@ const Form: React.FC = () => {
                         <label htmlFor="beneficiario">Beneficiário Ativo:</label>
                         <input type="checkbox" name="beneficiario" id="beneficiario" />
                     </fieldset> */}
-                </form>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
                     <button type="submit" className="btn btn-success m-3">Cadastrar</button>
                     <button className="btn btn-danger  m-3">Cancelar</button>
 
                 </div>
+                </form>
+                
             </Container>
         </div>
     )
