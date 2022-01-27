@@ -13,9 +13,10 @@ function Rotas() {
             <Routes>
                 {/* <Header></Header> */}
                 <Route path="/" element={<Home />}></Route>
-                <Route path="/lista" element={ <ListMat/> }   />
-           <Route path="/formulario" element={ <Formulario/>}   /> 
-               
+                <Route path="/lista" element={<ListMat />} />
+                <Route path="/formulario" element={<Formulario />} />
+                <Route path="/editform" element={<EditForm/>}/>
+
             </Routes>
         </BrowserRouter>
     )

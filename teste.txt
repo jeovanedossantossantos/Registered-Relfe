@@ -1,0 +1,1 @@
+nome,periodo,escola,dataNascimento,certidaoNascimento,corRaca,cpf,rg,sexo,nis,endereco,numero,bairro,pontoReferencia,telefone,telefone2,cidade,cep,nomePai,cpfPai,rgPai,telfonePai,nisPai,nomeMae,cpfMae,rgMae,telfoneMae,nisMae

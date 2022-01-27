@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarText, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from "reactstrap";
 import { Link } from "react-router-dom";
+import { QuemChamouContext } from "../../hooks/global";
 const Header: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState(false);
-
+  const {quemChamou,setquemChamou} = useContext(QuemChamouContext)
   const toggle = () => setIsOpen(!isOpen);
   return (
 
@@ -31,12 +32,12 @@ const Header: React.FC = () => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>
+              <NavLink onClick={()=> setquemChamou("CA")}>
               <Link to={"/formulario"}>Cadastra</Link>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>
+              <NavLink onClick={()=> setquemChamou("ED")}>
               <Link to={"/lista"}>Lista de Matriculados</Link>
               </NavLink>
             </NavItem>

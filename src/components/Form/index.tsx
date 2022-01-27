@@ -2,8 +2,6 @@ import React, { FormEvent, useCallback, useEffect, useState } from "react";
 import api from "../../server/api"
 import { Container } from "./style";
 
-
-
 interface IDate {
 
 
@@ -75,7 +73,8 @@ interface IDate {
 const Form: React.FC = () => {
 
     const [date, setDate] = useState<IDate>({} as IDate)
-
+    
+    // const {quemChamou, setQuemChamou} = useGlobal()
     // useEffect(() => {
     //     const data = new Date();
     //     let ca = []
