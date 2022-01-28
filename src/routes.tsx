@@ -11,7 +11,7 @@ function Rotas() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* <Header></Header> */}
+                <Header></Header>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/lista" element={<ListMat />} />
                 <Route path="/formulario" element={<Formulario />} />
