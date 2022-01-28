@@ -11,11 +11,11 @@ function Rotas() {
     return (
         <BrowserRouter>
             <Routes>
-                teste
+               
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/lista" element={<ListMat />} />
                 <Route path="/formulario" element={<Formulario />} />
-                <Route path="/editform" element={<EditForm/>}/>
+                <Route path="/editform" element={<EditForm />} />
 
             </Routes>
         </BrowserRouter>
