@@ -1,20 +1,15 @@
-import React, { FormEvent, useCallback, useEffect, useState } from "react";
+import React, { FormEvent, useCallback, useContext, useEffect, useState } from "react";
+import { QuemChamouContext } from "../../hooks/global";
 import api from "../../server/api"
 import { Container } from "./style";
 
 interface IDate {
 
-
-    // data_cadastro: {
-    //     dia: number,
-    //     mes: number,
-    //     ano: number
-    // };
     nome: string;
     periodo: string;
-    // grupo: number;
     escola: string;
-    // cras: string;
+    anoEscolar: string;
+    serie: string;
     dataNascimento: string;
     certidaoNascimento?: string;
     corRaca: string;
@@ -28,24 +23,11 @@ interface IDate {
     pontoReferencia: string;
     telefone: string;
     telefone2: string;
+    telfoneRec:string;
     cidade: string;
     cep: string;
     tipoSanguinio?: string;
-    // restriacoAlimetar: "Não" | "Sim";
-    // qualRestriacoAlimetar?: string;
-    // medicamento: "Não" | "Sim";
-    // qualMedicamento?: string;
-    // alergiaMedicamento: "Não" | "Sim";
-    // qualAlergiaMedicamento?: string;
-    // denca: "Não" | "Sim";
-    // qualDenca?: string;
-    // deficiencai: "Não" | "Sim";
-    // qualDeficiencai?: string;
-
-    // obs?: string;
-
-    // autoriz: "Não" | "Sim";
-
+    
     nomePai: string;
     cpfPai: string;
     rgPai: string;
@@ -71,7 +53,8 @@ interface IDate {
 }
 
 const Form: React.FC = () => {
-
+    const {quemChamou,setquemChamou} = useContext(QuemChamouContext)
+    console.log(quemChamou)
     const [date, setDate] = useState<IDate>({} as IDate)
     
     // const {quemChamou, setQuemChamou} = useGlobal()
