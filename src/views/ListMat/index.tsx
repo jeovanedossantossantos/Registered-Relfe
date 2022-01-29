@@ -1,78 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import { QuemChamouContext } from "../../hooks/global";
 import api from "../../server/api";
 
 interface IDate {
 
-
-    // data_cadastro: {
-    //     dia: number,
-    //     mes: number,
-    //     ano: number
-    // };
-    nome: string;
-    periodo: string;
-    // grupo: number;
+    nomeBeneficiario: string;
+    periodoEscola: string;
     escola: string;
-    // cras: string;
     dataNascimento: string;
-    certidaoNascimento?: string;
-    corRaca: string;
+    telFoneRec: string;
+    periodoRelfe: string;
     cpf: string;
-    rg?: string;
+    rg:string;
     sexo: string;
-    nis?: string;
+    nis: string;
     endereco: string;
-    numero: string;
+    ano: string;
     bairro: string;
     pontoReferencia: string;
-    telefone: string;
+    telefone1: string;
     telefone2: string;
-    cidade: string;
-    cep: string;
-    tipoSanguinio?: string;
-    // restriacoAlimetar: "Não" | "Sim";
-    // qualRestriacoAlimetar?: string;
-    // medicamento: "Não" | "Sim";
-    // qualMedicamento?: string;
-    // alergiaMedicamento: "Não" | "Sim";
-    // qualAlergiaMedicamento?: string;
-    // denca: "Não" | "Sim";
-    // qualDenca?: string;
-    // deficiencai: "Não" | "Sim";
-    // qualDeficiencai?: string;
-
-    // obs?: string;
-
-    // autoriz: "Não" | "Sim";
-
+    serie: string;
+    dataDesligamento?: string;
+    obs?: string;
     nomePai: string;
-    cpfPai: string;
-    rgPai: string;
-    telfonePai: string;
-    nisPai: string;
-
     nomeMae: string;
-    cpfMae: string;
-    rgMae: string;
-    telfoneMae: string;
-    nisMae: string;
-
     nomeResponsavel?: string;
-    cpfResponsavel?: string;
-    rgResponsavel?: string;
-    telfoneResponsavel?: string;
-    nisResponsavel?: string;
-
-    estadoCivil: string;
+    parentesco?: string;
 
 
 
 }
-
 const ListMat: React.FC = () => {
     const [dados, setDados] = useState<IDate[]>([])
+    const {quemChamou,setquemChamou,setquemNome} = useContext(QuemChamouContext)
     useEffect(() => {
         api.get('/')
             .then(response => {
@@ -80,6 +43,8 @@ const ListMat: React.FC = () => {
                 setDados(response.data)
             });
     }, [])
+
+    
 
     // useEffect(()=>{
     //     dados?.map(user => dispach((addNewUser(user))))
@@ -94,9 +59,9 @@ const ListMat: React.FC = () => {
                 dados?.map(e => (
                     <div key={e.cpf}>
                         <p>
-                            Nome: {e.nome}
+                            Nome: {e.nomeBeneficiario}
                         </p>
-                        <Link to={"/editform"}>Editar</Link>
+                        <Link to={"/editform"} onClick={()=>setquemNome(e.nomeBeneficiario)}>Editar</Link>
                     </div>
                 ))
             }
@@ -107,3 +72,5 @@ const ListMat: React.FC = () => {
 }
 
 export default ListMat;
+
+

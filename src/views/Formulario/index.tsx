@@ -9,7 +9,9 @@ import {Container} from './styles'
 const Formulario: React.FC =() => {
     const {quemChamou,setquemChamou} = useContext(QuemChamouContext)
     
-   
+   useEffect(()=>{
+       setquemChamou("CA")
+   })
     return (
         <div>
             <Header></Header>

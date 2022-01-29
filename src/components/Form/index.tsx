@@ -23,22 +23,23 @@ interface IDate {
     telefone1: string;
     telefone2: string;
     serie: string;
-    dataDesligamento: string;
-    obs: string;
+    dataDesligamento?: string;
+    obs?: string;
     nomePai: string;
     nomeMae: string;
-    nomeResponsavel: string;
-    parentesco: string;
+    nomeResponsavel?: string;
+    parentesco?: string;
 
 
 
 }
 
 const Form: React.FC = () => {
-    const { quemChamou, setquemChamou } = useContext(QuemChamouContext)
+    const { quemChamou, setquemChamou,quemNome } = useContext(QuemChamouContext)
     const  push  = useNavigate();
     console.log(quemChamou)
     const [date, setDate] = useState<IDate>({} as IDate)
+    const [dados, setDados] = useState<IDate[]>([])
 
     // const {quemChamou, setQuemChamou} = useGlobal()
     // useEffect(() => {
@@ -78,12 +79,42 @@ const Form: React.FC = () => {
         })
 
     }, [date])
+
+    const salveEdit = () =>{
+        api.patch(`nomeBeneficiario/${quemNome}`,date).then( response => {
+            console.log(response.data);
+            
+        });
+
+        push("/")
+    }
+
+    // useEffect(()=>{
+    //     if((quemNome !== "" ) && (quemChamou == "ED")){
+    //         console.log("Aqui => " +quemChamou)
+    //         api.get(`/search?nomeBeneficiario=${quemNome}`)
+    //         .then( response => {
+    //             console.log("Date 2")
+    //             console.log(response.data);
+    //             setDados(response.data)
+    //         }).catch(err=>{
+    //             console.log(err)
+    //         });
+
+
+    //     }else{
+    //         console.log("Else => " +quemChamou)
+    //     }
+       
+    // },[])
+
+    
 const redirecionar = ()=>{
 
 }
     return (
         <div>
-            <h1>Logo do Relfe</h1>
+            <h1></h1>
         
             <Container className="card">
                 
@@ -107,18 +138,22 @@ const redirecionar = ()=>{
     
                         <fieldset>
                             <legend>Identificação Do Beneficiário</legend>
-                            <div className="mb-3">
+                            <div className="mb-10">
                                 <label className="form-label" htmlFor="nome">Nome do Beneficiário</label>
                                 <input  type="text" name="nome" id="nome"
-                                placeholder="Digite o nome do beneficiário"
-                                 onChange={e => setDate({ ...date, nomeBeneficiario: e.target.value })} />
+                                // placeholder={quemNome === "" ? 'Digite o nome do beneficiário' : dados[0].nomeBeneficiario}
+                                
+                                // value={quemNome === '' ? '' : dados.map(e=>{return e.nomeBeneficiario})}
+                                
+                                value="jeovane"  
+                                 onChange={e => setDate({ ...date, nomeBeneficiario: e.target.value }) } />
                             </div>
     
                             <div className="row">
                                 <div className="mb-3">
                                     <label htmlFor="dataNascimento">Data de Nascimento:</label>
                                     <input type="date" name="dataNascimento" id="dataNascimento" placeholder="Digite a data"
-                                    onChange={e => setDate({ ...date, dataNascimento: e.target.value })}/>
+                                    onChange={e => setDate({ ...date, dataNascimento: e.target.value })} />
                                 </div>
     
                                 <div className="mb-3">
@@ -257,9 +292,13 @@ const redirecionar = ()=>{
                                     <input type="text" name="obs" id="obs" placeholder="Digite a observação do desligamento"/>
                                 </div>
                         </fieldset>
-                        <div style={{ display: "flex", justifyContent: "center" }}>
-                        <button type="submit" className="btn btn-success m-3">Cadastrar</button>
-                        <button className="btn btn-danger  m-3">Cancelar</button>
+                        <div style={{ display: "flex", justifyContent: "center" }}>salveEdit
+                       {quemNome === '' ?
+                        <button type="submit" className="btn btn-success m-3" onClick={()=>push("/")}>Cadastrar</button>
+                        :
+                        <button type="submit" className="btn btn-success m-3" onClick={()=>salveEdit()}>Salvar Edição</button>
+                        }
+                        <button className="btn btn-danger  m-3" onClick={()=>push("/")}>Cancelar</button>
     
                     </div>
                     </form>
