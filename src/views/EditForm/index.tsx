@@ -14,10 +14,10 @@ const EditForm: React.FC = () => {
     // setquemChamou("ED")
     useEffect(()=>{
         // setquemChamou("ED")
-        if(quemNome == ''){
+        if(quemNome != ''){
             setquemChamou("ED")
             // console.log("Aqui => " +quemChamou)
-            push("/lista")
+            // push("/lista")
         }
        
         if((quemNome == '') ){
