@@ -3,7 +3,7 @@ import { QuemChamouContext } from "../../hooks/global";
 import api from "../../server/api"
 import { Container } from "./style";
 import { useNavigate } from 'react-router-dom';
-
+import InputMask from "react-input-mask" 
 interface IDate {
 
     nomeBeneficiario: string;
@@ -98,21 +98,28 @@ const Form: React.FC = () => {
     const [isBlur, setIsBlur] = useState(false);
     // Handling input onChange event
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if((event.target.value === "___.___.___-__") || (event.target.value === "__.___.___-__")){
+            event.target.value = ''
+        }
         if (lista[posicao] === "nomeBeneficiario") {
-            setName(event.target.value);
-
-
-            setDate({ ...date, nomeBeneficiario: event.target.value })
-            console.log("Não ok")
+            
+                setName(event.target.value);
+                setDate({ ...date, nomeBeneficiario: event.target.value })
+            
+            
+            // console.log("Não ok")
         } if (lista[posicao] === "dataNascimento") {
-            setDataNascimento(event.target.value);
-
-
-            setDate({ ...date, dataNascimento: event.target.value })
+          
+                setDataNascimento(event.target.value);
+                setDate({ ...date, dataNascimento: event.target.value })
+            
+            
             console.log(event.target.value)
         } if (lista[posicao] === "periodoEscola") {
+           
             setPeriodoEscola(event.target.value);
             setDate({ ...date, periodoEscola: event.target.value })
+        
         } if (lista[posicao] === "escola") {
             setEscola(event.target.value)
             setDate({ ...date, escola: event.target.value })
@@ -124,6 +131,7 @@ const Form: React.FC = () => {
             setDate({ ...date, periodoRelfe: event.target.value })
         } if (lista[posicao] === "cpf") {
             setCpf(event.target.value)
+            console.log(cpf)
             setDate({ ...date, cpf: event.target.value })
         } if (lista[posicao] === "rg") {
             setRg(event.target.value)
@@ -367,7 +375,7 @@ const Form: React.FC = () => {
 
                             <div className="mb-3">
                                 <label htmlFor="CPFbeneficiario">CPF Beneficiário:</label>
-                                <input type="text" name="CPFbeneficiario" id="CPFbeneficiario"
+                                <InputMask mask="999.999.999-99" type="text" name="CPFbeneficiario" id="CPFbeneficiario"
                                     placeholder="Digite o CPF"
                                     value={cpf}
                                     onChange={changeHandler}
@@ -376,7 +384,7 @@ const Form: React.FC = () => {
 
                             <div className="mb-3">
                                 <label htmlFor="RGbeneficiario">RG Beneficiário:</label>
-                                <input type="text" name="RGbeneficiario" id="RGbeneficiario" placeholder="Digite o RG"
+                                <InputMask mask="99.999.999-99" type="text" name="RGbeneficiario" id="RGbeneficiario" placeholder="Digite o RG"
                                     value={rg}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(7)} />
