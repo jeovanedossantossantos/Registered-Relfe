@@ -38,7 +38,8 @@ const Form: React.FC = () => {
     const { quemChamou, setquemChamou, quemNome } = useContext(QuemChamouContext)
     const push = useNavigate();
 
-    const lista = ["nomeBeneficiario",
+    const lista = [
+        "nomeBeneficiario",
         "periodoEscola",
         "escola",
         "dataNascimento",
@@ -67,9 +68,7 @@ const Form: React.FC = () => {
     const [date2, setDate2] = useState<IDate[]>([])
     const [dados, setDados] = useState<IDate[]>([])
     const [dados2, setDados2] = useState<IDate[]>([])
-
     const [escrever, setEsc] = useState(false)
-
     const [nomeBeneficiario, setName] = useState("");
     const [dataNascimento, setDataNascimento] = useState("");
     const [periodoEscola, setPeriodoEscola] = useState("");
@@ -98,20 +97,13 @@ const Form: React.FC = () => {
     const [isBlur, setIsBlur] = useState(false);
     // Handling input onChange event
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // if ((event.target.value === "___.___.___-__") || (event.target.value === "__.___.___-__")) {
-        //     event.target.value = ''
-        // }
+        
         if ((lista[posicao] === "nomeBeneficiario") && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "99)9-9999-9999")) {
-            // if ((event.target.value === "___.___.___-__") || (event.target.value === "__.___.___-__")) {
-            //     event.target.value = ''
-            // }
             setName(event.target.value);
             setDate({ ...date, nomeBeneficiario: event.target.value })
-
-
-            
+  
         } if (lista[posicao] === "dataNascimento" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
@@ -354,6 +346,9 @@ const Form: React.FC = () => {
                         <div className="mb-10">
                             <label className="form-label" htmlFor="nome">Nome do Beneficiário</label>
                             <input type="text" name="nome" id="nome"
+                            style={{width:500}}
+                            required
+                            
                                 onFocus={focusHandler}
                                 onBlur={blurHandler}
                                 value={nomeBeneficiario}
