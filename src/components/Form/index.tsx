@@ -62,7 +62,7 @@ const Form: React.FC = () => {
         "nomeResponsavel",
         "parentesco",]
     const [posicao, setPosicao] = useState(Number)
-    // console.log(quemChamou)
+    
     const [date, setDate] = useState<IDate>({} as IDate)
     const [date2, setDate2] = useState<IDate[]>([])
     const [dados, setDados] = useState<IDate[]>([])
@@ -111,7 +111,7 @@ const Form: React.FC = () => {
             setDate({ ...date, nomeBeneficiario: event.target.value })
 
 
-            // console.log("Não ok")
+            
         } if (lista[posicao] === "dataNascimento" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
@@ -120,7 +120,7 @@ const Form: React.FC = () => {
             setDate({ ...date, dataNascimento: event.target.value })
 
 
-            console.log(event.target.value)
+           
         } if (lista[posicao] === "periodoEscola" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
@@ -147,7 +147,7 @@ const Form: React.FC = () => {
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
             setCpf(event.target.value)
-            console.log(cpf)
+           
             setDate({ ...date, cpf: event.target.value })
 
         } if (lista[posicao] === "rg" && (event.target.value !== "___.___.___-__")
@@ -230,9 +230,7 @@ const Form: React.FC = () => {
             setParentesco(event.target.value)
             setDate({ ...date, parentesco: event.target.value })
         }
-        else {
-            console.log("ok")
-        }
+        
     };
 
     // Handling input onFocus event
@@ -241,7 +239,7 @@ const Form: React.FC = () => {
         setIsBlur(false);
 
         // Do something with event
-        // console.log(event);
+       
     };
 
     // Handling input onBlur event
@@ -253,17 +251,15 @@ const Form: React.FC = () => {
 
         if (nomeBeneficiario.match(/^[a-z][a-z\s]*$/i)) {
             setIsValid(true);
-            console.log(lista[posicao])
+            
         }
-        // if (lista[posicao] === "dataNascimento") {
-        //     console.log(lista[posicao])
-        // }
+       
         else {
             setIsValid(false);
         }
 
         // Do something with event
-        console.log(event);
+       
     };
 
     const hadleSumbmit = useCallback((e: FormEvent<HTMLFormElement>) => {
@@ -272,7 +268,7 @@ const Form: React.FC = () => {
 
         api.post("/", date).then(() => {
 
-            console.log("Olá " + dados.push(date))
+          
             push("/")
 
         }
@@ -281,7 +277,7 @@ const Form: React.FC = () => {
 
         ).catch((err) => {
             {
-                console.log(date)
+                console.log(err)
             }
         })
 
@@ -289,7 +285,7 @@ const Form: React.FC = () => {
 
     const salveEdit = () => {
         api.patch(`nomeBeneficiario/${quemNome}`, date).then(response => {
-            console.log(response.data);
+          
 
         });
 
@@ -298,11 +294,10 @@ const Form: React.FC = () => {
 
     useEffect(() => {
         if ((quemNome !== "") && (quemChamou == "ED")) {
-            console.log("Aqui => " + quemChamou)
+           
             api.get(`/search?nomeBeneficiario=${quemNome}`)
                 .then(response => {
-                    console.log("Date 2")
-                    console.log(response.data);
+                   
                     setName(response.data[0].nomeBeneficiario)
                     setDataNascimento(response.data[0].dataNascimento)
                     setPeriodoEscola(response.data[0].periodoEscola)
@@ -326,7 +321,7 @@ const Form: React.FC = () => {
                     setNomeMae(response.data[0].nomeMae)
                     setNomeRespo(response.data[0].nomeResponsavel)
                     setParentesco(response.data[0].parentesco)
-                    console.log(response.data)
+                   
 
 
                 }).catch(err => {
@@ -334,22 +329,14 @@ const Form: React.FC = () => {
                 });
 
 
-        } else {
-            console.log("Else => " + quemChamou)
-        }
+        } 
 
 
     }, [])
 
-    const resolver = (e: any) => {
+    
 
-        console.log(e.target.value)
-
-    }
-
-    const redirecionar = () => {
-
-    }
+    
     return (
         <div>
 

@@ -39,7 +39,7 @@ const ListMat: React.FC = () => {
     useEffect(() => {
         api.get('/')
             .then(response => {
-                console.log(response.data);
+               
                 setDados(response.data)
             });
     }, [])
