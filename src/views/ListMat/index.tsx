@@ -57,7 +57,7 @@ const ListMat: React.FC = () => {
             
             {
                 dados?.map(e => (
-                    <div key={e.cpf}>
+                    <div key={e.nomeBeneficiario}>
                         <p>
                             Nome: {e.nomeBeneficiario}
                         </p>

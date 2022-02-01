@@ -3,30 +3,30 @@ import { QuemChamouContext } from "../../hooks/global";
 import api from "../../server/api"
 import { Container } from "./style";
 import { useNavigate } from 'react-router-dom';
-import InputMask from "react-input-mask" 
+import InputMask from "react-input-mask"
 interface IDate {
 
     nomeBeneficiario: string;
-    periodoEscola: string;
-    escola: string;
+    periodoEscola?: string;
+    escola?: string;
     dataNascimento: string;
-    telFoneRec: string;
-    periodoRelfe: string;
-    cpf: string;
-    rg: string;
-    sexo: string;
-    nis: string;
-    endereco: string;
-    ano: string;
-    bairro: string;
-    pontoReferencia: string;
-    telefone1: string;
-    telefone2: string;
-    serie: string;
+    telFoneRec?: string;
+    periodoRelfe?: string;
+    cpf?: string;
+    rg?: string;
+    sexo?: string;
+    nis?: string;
+    endereco?: string;
+    ano?: string;
+    bairro?: string;
+    pontoReferencia?: string;
+    telefone1?: string;
+    telefone2?: string;
+    serie?: string;
     dataDesligamento?: string;
     obs?: string;
-    nomePai: string;
-    nomeMae: string;
+    nomePai?: string;
+    nomeMae?: string;
     nomeResponsavel?: string;
     parentesco?: string;
 
@@ -98,89 +98,137 @@ const Form: React.FC = () => {
     const [isBlur, setIsBlur] = useState(false);
     // Handling input onChange event
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if((event.target.value === "___.___.___-__") || (event.target.value === "__.___.___-__")){
-            event.target.value = ''
-        }
-        if (lista[posicao] === "nomeBeneficiario") {
-            
-                setName(event.target.value);
-                setDate({ ...date, nomeBeneficiario: event.target.value })
-            
-            
+        // if ((event.target.value === "___.___.___-__") || (event.target.value === "__.___.___-__")) {
+        //     event.target.value = ''
+        // }
+        if ((lista[posicao] === "nomeBeneficiario") && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "99)9-9999-9999")) {
+            // if ((event.target.value === "___.___.___-__") || (event.target.value === "__.___.___-__")) {
+            //     event.target.value = ''
+            // }
+            setName(event.target.value);
+            setDate({ ...date, nomeBeneficiario: event.target.value })
+
+
             // console.log("Não ok")
-        } if (lista[posicao] === "dataNascimento") {
-          
-                setDataNascimento(event.target.value);
-                setDate({ ...date, dataNascimento: event.target.value })
-            
-            
+        } if (lista[posicao] === "dataNascimento" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
+
+            setDataNascimento(event.target.value);
+            setDate({ ...date, dataNascimento: event.target.value })
+
+
             console.log(event.target.value)
-        } if (lista[posicao] === "periodoEscola") {
-           
+        } if (lista[posicao] === "periodoEscola" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
+
             setPeriodoEscola(event.target.value);
             setDate({ ...date, periodoEscola: event.target.value })
-        
-        } if (lista[posicao] === "escola") {
+
+        } if (lista[posicao] === "escola" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setEscola(event.target.value)
             setDate({ ...date, escola: event.target.value })
-        } if (lista[posicao] === "telFoneRec") {
+        } if (lista[posicao] === "telFoneRec" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__") &&
+            (event.target.value !=="__)_-____-____")) {
             setTelFoneRec(event.target.value)
             setDate({ ...date, telFoneRec: event.target.value })
-        } if (lista[posicao] === "periodoRelfe") {
+        } if (lista[posicao] === "periodoRelfe" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setPeriodoRelfe(event.target.value)
             setDate({ ...date, periodoRelfe: event.target.value })
-        } if (lista[posicao] === "cpf") {
+        } if (lista[posicao] === "cpf"
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setCpf(event.target.value)
             console.log(cpf)
             setDate({ ...date, cpf: event.target.value })
-        } if (lista[posicao] === "rg") {
+
+        } if (lista[posicao] === "rg" && (event.target.value !== "___.___.___-__")
+
+            && (event.target.value !== "__)_-____-____")) {
             setRg(event.target.value)
             setDate({ ...date, rg: event.target.value })
-        } if (lista[posicao] === "sexo") {
+
+        } if (lista[posicao] === "sexo" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setSexo(event.target.value)
             setDate({ ...date, sexo: event.target.value })
-        } if (lista[posicao] === "nis") {
+        } if (lista[posicao] === "nis" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setNis(event.target.value)
             setDate({ ...date, nis: event.target.value })
-        } if (lista[posicao] === "endereco") {
+        } if (lista[posicao] === "endereco" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setEndereco(event.target.value)
             setDate({ ...date, endereco: event.target.value })
-        } if (lista[posicao] === "ano") {
+        } if (lista[posicao] === "ano" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setAno(event.target.value)
             setDate({ ...date, ano: event.target.value })
-        } if (lista[posicao] === "bairro") {
+        } if (lista[posicao] === "bairro" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setBairro(event.target.value)
             setDate({ ...date, bairro: event.target.value })
-        } if (lista[posicao] === "pontoReferencia") {
+        } if (lista[posicao] === "pontoReferencia" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setPontoRef(event.target.value)
             setDate({ ...date, pontoReferencia: event.target.value })
-        } if (lista[posicao] === "telefone1") {
+        } if ((lista[posicao] === "telefone1") &&( (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__") && (event.target.value !=="__)_-____-____"))) {
             setTel1(event.target.value)
             setDate({ ...date, telefone1: event.target.value })
-        } if (lista[posicao] === "telefone2") {
+        } if (lista[posicao] === "telefone2" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__") && (event.target.value !=="__)_-____-____")) {
             setTel2(event.target.value)
             setDate({ ...date, telefone2: event.target.value })
-        } if (lista[posicao] === "serie") {
+        } if (lista[posicao] === "serie" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setTel2(event.target.value)
             setDate({ ...date, serie: event.target.value })
-        } if (lista[posicao] === "dataDesligamento") {
+        } if (lista[posicao] === "dataDesligamento" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setDesLig(event.target.value)
             setDate({ ...date, dataDesligamento: event.target.value })
-        } if (lista[posicao] === "obs") {
+        } if (lista[posicao] === "obs" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setObs(event.target.value)
             setDate({ ...date, obs: event.target.value })
-        } if (lista[posicao] === "nomePai"){
+        } if (lista[posicao] === "nomePai" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setNomePai(event.target.value)
-            setDate({...date, nomePai: event.target.value})
-        } if (lista[posicao] === "nomeMae"){
+            setDate({ ...date, nomePai: event.target.value })
+        } if (lista[posicao] === "nomeMae" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setNomeMae(event.target.value)
-            setDate({...date, nomeMae: event.target.value})
-        } if (lista[posicao] === "nomeResponsavel"){
+            setDate({ ...date, nomeMae: event.target.value })
+        } if (lista[posicao] === "nomeResponsavel" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setNomeRespo(event.target.value)
-            setDate({...date, nomeResponsavel: event.target.value})
-        } if (lista[posicao] === "parentesco"){
+            setDate({ ...date, nomeResponsavel: event.target.value })
+        } if (lista[posicao] === "parentesco" && (event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__")
+            && (event.target.value !== "__)_-____-____")) {
             setParentesco(event.target.value)
-            setDate({...date, parentesco: event.target.value})
+            setDate({ ...date, parentesco: event.target.value })
         }
         else {
             console.log("ok")
@@ -193,7 +241,7 @@ const Form: React.FC = () => {
         setIsBlur(false);
 
         // Do something with event
-        console.log(event);
+        // console.log(event);
     };
 
     // Handling input onBlur event
@@ -206,9 +254,10 @@ const Form: React.FC = () => {
         if (nomeBeneficiario.match(/^[a-z][a-z\s]*$/i)) {
             setIsValid(true);
             console.log(lista[posicao])
-        } if (lista[posicao] === "dataNascimento") {
-            console.log(lista[posicao])
         }
+        // if (lista[posicao] === "dataNascimento") {
+        //     console.log(lista[posicao])
+        // }
         else {
             setIsValid(false);
         }
@@ -277,6 +326,7 @@ const Form: React.FC = () => {
                     setNomeMae(response.data[0].nomeMae)
                     setNomeRespo(response.data[0].nomeResponsavel)
                     setParentesco(response.data[0].parentesco)
+                    console.log(response.data)
 
 
                 }).catch(err => {
@@ -302,42 +352,11 @@ const Form: React.FC = () => {
     }
     return (
         <div>
-            {/* <div className="container">
-                <h3>Please enter your name:</h3>
-                <input
-                    type="text"
-                    onFocus={focusHandler}
-                    onBlur={blurHandler}
-                    value={name}
-                    onChange={changeHandler}
-                    className="input"
-                    placeholder="Please enter your name"
-                />
-                {isFocus && (
-                    <span className="hint">
-                        Only letters and spaces are acceptable
-                    </span>
-                )}
-                {isBlur && !isValid && <p className="error">The name you entered is not valid</p>}
-                {isBlur && isValid && <p className="success">The name you entered looks good</p>}
-            </div>
-            <h1 onClick={()=>setName("jeovane")}>Aqui</h1> */}
+
 
             <Container className="card">
 
-                {/* onSubmit={hadleSumbmit} */}
-                {/* <form >
 
-                    <input
-                        type="text"
-                        placeholder="Infomer seu nome"
-                        onChange={e => setDate({ ...data, nome: e.target.value })}
-                    />
-                    
-
-
-                    <button type="submit" value="Cadastra">Cadastra</button>
-                </form> */}
                 <form onSubmit={hadleSumbmit}>
 
                     <h1>Ficha de Matrícula</h1>
@@ -348,15 +367,10 @@ const Form: React.FC = () => {
                         <div className="mb-10">
                             <label className="form-label" htmlFor="nome">Nome do Beneficiário</label>
                             <input type="text" name="nome" id="nome"
-                                // placeholder={quemNome === "" ? 'Digite o nome do beneficiário' : dados[0].nomeBeneficiario}
-
-                                // value={quemNome === '' ? '' : dados.map(e=>{return e.nomeBeneficiario})}
                                 onFocus={focusHandler}
                                 onBlur={blurHandler}
                                 value={nomeBeneficiario}
-                                // onChange={resolver}
 
-                                // onFocus={e => setState( {value: 'text'}) }
 
                                 onChange={changeHandler}
                                 onClick={() => setPosicao(0)}
@@ -367,7 +381,7 @@ const Form: React.FC = () => {
                             <div className="mb-3">
                                 <label htmlFor="dataNascimento">Data de Nascimento:</label>
                                 <input type="date" name="dataNascimento" id="dataNascimento" placeholder="Digite a data"
-                                    // onChange={e => setDate({ ...date, dataNascimento: e.target.value })}  
+
                                     value={dataNascimento}
                                     onChange={changeHandler}
                                     onClick={() => setPosicao(3)} />
@@ -442,7 +456,7 @@ const Form: React.FC = () => {
 
                             <div className="mb-3">
                                 <label htmlFor="telContato">Telefone 1:</label>
-                                <input type="text" name="telContato" id="telContato" placeholder="Digite o telefone"
+                                <InputMask mask="99)9-9999-9999" type="text" name="telContato" id="telContato" placeholder="Digite o telefone"
                                     value={telefone1}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(14)} />
@@ -450,7 +464,7 @@ const Form: React.FC = () => {
 
                             <div className="mb-3">
                                 <label htmlFor="telContato2">Telefone 2:</label>
-                                <input type="text" name="telContato2" id="telContato2" placeholder="Digite o telefone"
+                                <InputMask mask="99)9-9999-9999" type="text" name="telContato2" id="telContato2" placeholder="Digite o telefone"
                                     value={telefone2}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(15)} />
@@ -458,7 +472,7 @@ const Form: React.FC = () => {
 
                             <div className="mb-3">
                                 <label htmlFor="telefone-recado">Telefone Recado:</label>
-                                <input type="text" name="telfone-recado" id="telefone-recado" placeholder="Telefone para recado"
+                                <InputMask mask="99)9-9999-9999" type="text" name="telfone-recado" id="telefone-recado" placeholder="Telefone para recado"
                                     value={telFoneRec}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(4)} />
@@ -469,40 +483,43 @@ const Form: React.FC = () => {
 
                     <fieldset className="mb-3">
                         <legend>Filiação / Responsável Legal</legend>
-                        <label htmlFor="nomePai">Nome do Pai:</label>
-                        <input type="text" name="nomePai" id="nomePai" placeholder="Digite o nome do pai"
-                        value={nomePai}
-                            onChange={changeHandler}
-                            onClick={e=>setPosicao(19)} />
-                    </fieldset>
 
-                    <fieldset className="mb-3">
-                        <label htmlFor="nomeMae">Nome da Mãe:</label>
-                        <input type="text" name="nomeMae" id="nomeMae" placeholder="Digite o nome da mãe"
-                            value={nomeMae}
-                            onChange={changeHandler}
-                            onClick={e=>setPosicao(20)} />
-                    </fieldset>
+                        <fieldset className="mb-3">
+                            <label htmlFor="nomePai">Nome do Pai:</label>
+                            <input type="text" name="nomePai" id="nomePai" placeholder="Digite o nome do pai"
+                                value={nomePai}
+                                onChange={changeHandler}
+                                onClick={e => setPosicao(19)} />
+                        </fieldset>
 
-                    <fieldset className="mb-3">
-                        <label htmlFor="nomeResponsavel">Responsável Legal:</label>
-                        <input type="text" name="nomeResponsavel" id="nomeResponsavel" placeholder="Digite o nome do responsalvel" 
-                        value={nomeResponsavel}
-                        onChange={changeHandler}
-                        onClick={e=>setPosicao(21)}
-                        />
-                    </fieldset>
 
-                    <fieldset className="mb-3">
-                        <label htmlFor="parentesco">Parentesco:</label>
-                        <input type="text" name="parentesco" id="parentesco" placeholder="Digite o parentesco" 
-                        value={parentesco}
-                        onChange={changeHandler}
-                        onClick={e=>setPosicao(22)}
-                        />
-                    </fieldset>
+                        <fieldset className="mb-3">
+                            <label htmlFor="nomeMae">Nome da Mãe:</label>
+                            <input type="text" name="nomeMae" id="nomeMae" placeholder="Digite o nome da mãe"
+                                value={nomeMae}
+                                onChange={changeHandler}
+                                onClick={e => setPosicao(20)} />
+                        </fieldset>
 
-                   
+                        <fieldset className="mb-3">
+                            <label htmlFor="nomeResponsavel">Responsável Legal:</label>
+                            <input type="text" name="nomeResponsavel" id="nomeResponsavel" placeholder="Digite o nome do responsalvel"
+                                value={nomeResponsavel}
+                                onChange={changeHandler}
+                                onClick={e => setPosicao(21)}
+                            />
+                        </fieldset>
+
+                        <fieldset className="mb-3">
+                            <label htmlFor="parentesco">Parentesco:</label>
+                            <input type="text" name="parentesco" id="parentesco" placeholder="Digite o parentesco"
+                                value={parentesco}
+                                onChange={changeHandler}
+                                onClick={e => setPosicao(22)}
+                            />
+                        </fieldset>
+
+                    </fieldset>
 
                     <fieldset>
                         <legend>Histórico Escolar</legend>
