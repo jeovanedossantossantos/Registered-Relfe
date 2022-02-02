@@ -37,7 +37,7 @@ interface IDate {
 }
 
 const Form: React.FC = () => {
-    const { quemChamou, setquemChamou, quemNome } = useContext(QuemChamouContext)
+    const { quemChamou, setquemChamou, quemNome,qualId } = useContext(QuemChamouContext)
     const push = useNavigate();
 
     const lista = [
@@ -276,12 +276,12 @@ const Form: React.FC = () => {
     }, [date])
 
     const salveEdit = () => {
-        api.patch(`nomeBeneficiario/${quemNome}`, date).then(response => {
-
+        api.patch(`id/${qualId}`, date).then(response => {
+            push("/")
 
         });
 
-        push("/")
+        
     }
 
     useEffect(() => {
@@ -291,8 +291,8 @@ const Form: React.FC = () => {
            
         }) 
         if ((quemNome !== "") && (quemChamou == "ED")) {
-           
-            api.get(`/search?nomeBeneficiario=${quemNome}`)
+            // id/${qualId}
+            api.get(`/search?id=${qualId}`)
                 .then(response => {
 
                     setName(response.data[0].nomeBeneficiario)

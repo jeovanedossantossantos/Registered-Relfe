@@ -37,7 +37,7 @@ interface IDate {
 }
 const ListMat: React.FC = () => {
     const [dados, setDados] = useState<IDate[]>([])
-    const { quemChamou, setquemChamou, setquemNome } = useContext(QuemChamouContext)
+    const { quemChamou, setquemChamou, setquemNome,setqualId } = useContext(QuemChamouContext)
     useEffect(() => {
         api.get('/')
             .then(response => {
@@ -45,7 +45,10 @@ const ListMat: React.FC = () => {
                 setDados(response.data)
             });
     }, [])
-
+    const passando = (id: number, nome: string)=>{
+       setqualId(id)
+       setquemNome(nome)
+    }
 
     return (
 
@@ -73,7 +76,7 @@ const ListMat: React.FC = () => {
                                 <th scope="row">{e.id}</th>
                                 <td>{e.nomeBeneficiario}</td>
                                 <td>{e.dataNascimento}</td>
-                                <td><Link className="btn btn-secondary" to={"/editform"} onClick={()=>setquemNome(e.nomeBeneficiario)}>Editar</Link></td>
+                                <td><Link className="btn btn-secondary" to={"/editform"} onClick={() =>passando(e.id, e.nomeBeneficiario)}>Editar</Link></td>
                             </tr>
 
                         </tbody>
