@@ -1,31 +1,28 @@
-# Iniciando e configurando projeto 
+<img src="./imgRe">
 
 <h2>Objetivo do projeto</h2>
 
-<p>Criar um sitema de cadastro de criaçãs, onde constara os dados 
-mais importantes para indentificala.
+<p>Criar um sistema de cadastro de crianças, onde constara os dados mais importantes para identificá-la.
 </p>
 
 # Itens
 <ol>
 <li>[x] Home
-<p>Onde possui dois botões, cadastre  e lista de matriculados</p>
+<p>Onde possui dois botões, cadastre e lista de matriculados</p>
 </li>
 <li>[x] Cadastre 
-  <p>Redireciona para o formulario de cadastro</p>
+  <p>Redireciona para o formulário de cadastro</p>
 </li>
 <li>[x] Lista de matriculados
-<p>Onde listara todas as crianças matriculadas na ong e para ver os detalhes em cada
-registro tem um botão de Editar que ao clicar sera redirecionado para a pagina de 
-edição de formulario</p>
+<p>Onde listara todas as crianças matriculadas na ong e para ver os detalhes em cada registro tem um botão de Editar que ao clicar será redirecionado para a página de edição de formulário</p>
 </li>
 
 </ol>
 
 # Ferramenta Usadas
+<p>Para o desenvolvimento da aplicação, foi usa uma api chamada <a href="https://sheetdb.io/">sheetdb</a> que basicamente faz conexão com uma planilha da Excel do google, foi usado também o ReactJs com o TypeScript, boostrap, reactstrap, e os módulos que estão abaixo...</p>
 
-<p>Para o desenvolvimeto da aplicação, foi usa uma api chamada <a href="https://sheetdb.io/">sheetdb</a> que basucamente faz conexão com uma planilha da execl do google, foi usado tambem o ReactJs com o TypeScript, boostrap, reactstrap, e os modulos que estão abaixo...
-</p>
+# Iniciando e configurando projeto 
 
 <ol>
     <li>npx create-react-app screlfe</li>
@@ -66,12 +63,12 @@ edição de formulario</p>
 
 # Hospedagem 
 
-<p>O sistema foi hospedado na platarfomra heroku de forma gratuita
- e seu dominio fico o padrão que a platarfoma disponibilza</p>
+<p>O sistema foi hospedado na plataforma heroku de forma gratuita e seu domínio fico o padrão que a plataforma disponibiliza.
+Lembrando que esse sistema é apenas uma amostra do original, já que o original seu link não será divulgado.
+</p>
 
 # Onde posso ver?
 
-<p>Experimete o sistema acessando por esse link: <a href="https://registered-relfe.herokuapp.com/">Clique aqui</a></p>
+<p>Experimente o sistema acessando por esse link: <a href="https://registered-relfe.herokuapp.com/">Clique aqui</a></p>
 
-<p>Lembrando que esse sistema é apenas uma amostra do original, já que o original seu link não 
-sera divulgado</p>
+
