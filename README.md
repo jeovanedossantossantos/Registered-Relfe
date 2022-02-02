@@ -1,4 +1,4 @@
-<img src="./imgRe">
+<img src="./imgRe/img1.png">
 
 <h2>Objetivo do projeto</h2>
 
