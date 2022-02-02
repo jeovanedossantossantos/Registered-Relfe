@@ -4,6 +4,7 @@ import api from "../../server/api"
 import { Container } from "./style";
 import { useNavigate } from 'react-router-dom';
 import InputMask from "react-input-mask"
+import { FormGroup, Input, Label } from "reactstrap";
 interface IDate {
 
     nomeBeneficiario: string;
@@ -29,6 +30,7 @@ interface IDate {
     nomeMae?: string;
     nomeResponsavel?: string;
     parentesco?: string;
+    id: number;
 
 
 
@@ -63,7 +65,7 @@ const Form: React.FC = () => {
         "nomeResponsavel",
         "parentesco",]
     const [posicao, setPosicao] = useState(Number)
-    
+
     const [date, setDate] = useState<IDate>({} as IDate)
     const [date2, setDate2] = useState<IDate[]>([])
     const [dados, setDados] = useState<IDate[]>([])
@@ -92,18 +94,19 @@ const Form: React.FC = () => {
     const [nomeMae, setNomeMae] = useState("")
     const [nomeResponsavel, setNomeRespo] = useState("")
     const [parentesco, setParentesco] = useState("")
+    const [idCont, setId] = useState(1)
     const [isValid, setIsValid] = useState(false);
     const [isFocus, setIsFocus] = useState(false);
     const [isBlur, setIsBlur] = useState(false);
     // Handling input onChange event
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        
+
         if ((lista[posicao] === "nomeBeneficiario") && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "99)9-9999-9999")) {
             setName(event.target.value);
             setDate({ ...date, nomeBeneficiario: event.target.value })
-  
+
         } if (lista[posicao] === "dataNascimento" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
@@ -112,7 +115,7 @@ const Form: React.FC = () => {
             setDate({ ...date, dataNascimento: event.target.value })
 
 
-           
+
         } if (lista[posicao] === "periodoEscola" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
@@ -127,7 +130,7 @@ const Form: React.FC = () => {
             setDate({ ...date, escola: event.target.value })
         } if (lista[posicao] === "telFoneRec" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__") &&
-            (event.target.value !=="__)_-____-____")) {
+            (event.target.value !== "__)_-____-____")) {
             setTelFoneRec(event.target.value)
             setDate({ ...date, telFoneRec: event.target.value })
         } if (lista[posicao] === "periodoRelfe" && (event.target.value !== "___.___.___-__")
@@ -139,7 +142,7 @@ const Form: React.FC = () => {
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
             setCpf(event.target.value)
-           
+
             setDate({ ...date, cpf: event.target.value })
 
         } if (lista[posicao] === "rg" && (event.target.value !== "___.___.___-__")
@@ -178,18 +181,18 @@ const Form: React.FC = () => {
             && (event.target.value !== "__)_-____-____")) {
             setPontoRef(event.target.value)
             setDate({ ...date, pontoReferencia: event.target.value })
-        } if ((lista[posicao] === "telefone1") &&( (event.target.value !== "___.___.___-__")
-            && (event.target.value !== "__.___.___-__") && (event.target.value !=="__)_-____-____"))) {
+        } if ((lista[posicao] === "telefone1") && ((event.target.value !== "___.___.___-__")
+            && (event.target.value !== "__.___.___-__") && (event.target.value !== "__)_-____-____"))) {
             setTel1(event.target.value)
             setDate({ ...date, telefone1: event.target.value })
         } if (lista[posicao] === "telefone2" && (event.target.value !== "___.___.___-__")
-            && (event.target.value !== "__.___.___-__") && (event.target.value !=="__)_-____-____")) {
+            && (event.target.value !== "__.___.___-__") && (event.target.value !== "__)_-____-____")) {
             setTel2(event.target.value)
             setDate({ ...date, telefone2: event.target.value })
         } if (lista[posicao] === "serie" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
             && (event.target.value !== "__)_-____-____")) {
-            setTel2(event.target.value)
+            setSerie(event.target.value)
             setDate({ ...date, serie: event.target.value })
         } if (lista[posicao] === "dataDesligamento" && (event.target.value !== "___.___.___-__")
             && (event.target.value !== "__.___.___-__")
@@ -222,7 +225,7 @@ const Form: React.FC = () => {
             setParentesco(event.target.value)
             setDate({ ...date, parentesco: event.target.value })
         }
-        
+
     };
 
     // Handling input onFocus event
@@ -231,7 +234,7 @@ const Form: React.FC = () => {
         setIsBlur(false);
 
         // Do something with event
-       
+
     };
 
     // Handling input onBlur event
@@ -243,24 +246,21 @@ const Form: React.FC = () => {
 
         if (nomeBeneficiario.match(/^[a-z][a-z\s]*$/i)) {
             setIsValid(true);
-            
+
         }
-       
+
         else {
             setIsValid(false);
         }
 
-        // Do something with event
-       
     };
 
     const hadleSumbmit = useCallback((e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-
+        
         api.post("/", date).then(() => {
 
-          
+
             push("/")
 
         }
@@ -277,7 +277,7 @@ const Form: React.FC = () => {
 
     const salveEdit = () => {
         api.patch(`nomeBeneficiario/${quemNome}`, date).then(response => {
-          
+
 
         });
 
@@ -285,11 +285,16 @@ const Form: React.FC = () => {
     }
 
     useEffect(() => {
+        api.get("/count").then( res =>{
+            const r = res.data.rows+1
+            setDate({...date, id: res.data.rows+1})
+           
+        }) 
         if ((quemNome !== "") && (quemChamou == "ED")) {
            
             api.get(`/search?nomeBeneficiario=${quemNome}`)
                 .then(response => {
-                   
+
                     setName(response.data[0].nomeBeneficiario)
                     setDataNascimento(response.data[0].dataNascimento)
                     setPeriodoEscola(response.data[0].periodoEscola)
@@ -313,7 +318,7 @@ const Form: React.FC = () => {
                     setNomeMae(response.data[0].nomeMae)
                     setNomeRespo(response.data[0].nomeResponsavel)
                     setParentesco(response.data[0].parentesco)
-                   
+
 
 
                 }).catch(err => {
@@ -321,14 +326,14 @@ const Form: React.FC = () => {
                 });
 
 
-        } 
+        }
 
 
     }, [])
 
-    
 
-    
+
+
     return (
         <div>
 
@@ -338,17 +343,18 @@ const Form: React.FC = () => {
 
                 <form onSubmit={hadleSumbmit}>
 
-                    <h1>Ficha de Matrícula</h1>
+                    <h1 style={{fontSize:30}}>{quemChamou === 'CA' ? "Ficha de Matrícula" : "Dados do Matriculado"}</h1>
 
 
                     <fieldset>
                         <legend>Identificação Do Beneficiário</legend>
-                        <div className="mb-10">
+                        <div className="mb-10 form-group">
                             <label className="form-label" htmlFor="nome">Nome do Beneficiário</label>
                             <input type="text" name="nome" id="nome"
-                            style={{width:500}}
-                            required
-                            
+                                className="form-control"
+                                style={{}}
+                                required
+
                                 onFocus={focusHandler}
                                 onBlur={blurHandler}
                                 value={nomeBeneficiario}
@@ -359,105 +365,120 @@ const Form: React.FC = () => {
                             />
                         </div>
 
-                        <div className="row">
-                            <div className="mb-3">
-                                <label htmlFor="dataNascimento">Data de Nascimento:</label>
-                                <input type="date" name="dataNascimento" id="dataNascimento" placeholder="Digite a data"
+                        <div className="row" >
+                            <div style={{ display: "flex", }}>
+                                <div className="mb-3 form-group m-1">
+                                    <label className="form-label" htmlFor="dataNascimento">Data de Nascimento:</label>
+                                    <input className="" type="date" name="dataNascimento" id="dataNascimento" placeholder="Digite a data"
 
-                                    value={dataNascimento}
-                                    onChange={changeHandler}
-                                    onClick={() => setPosicao(3)} />
+                                        value={dataNascimento}
+                                        onChange={changeHandler}
+                                        onClick={() => setPosicao(3)} />
+                                </div>
+
+                                <div className="mb-3 m-1 form-group">
+                                    <label className="form-label" htmlFor="CPFbeneficiario">CPF Beneficiário:</label>
+                                    <InputMask mask="999.999.999-99" type="text" name="CPFbeneficiario" id="CPFbeneficiario"
+                                        placeholder="Digite o CPF"
+                                        value={cpf}
+                                        onChange={changeHandler}
+                                        onClick={e => setPosicao(6)} />
+                                </div>
+                                <div className="mb-3 m-1 form-group">
+                                    <label className="form-label" htmlFor="RGbeneficiario">RG Beneficiário:</label>
+                                    <InputMask mask="99.999.999-99" type="text" name="RGbeneficiario" id="RGbeneficiario" placeholder="Digite o RG"
+                                        value={rg}
+                                        onChange={changeHandler}
+                                        onClick={e => setPosicao(7)} />
+                                </div>
+
+
                             </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="CPFbeneficiario">CPF Beneficiário:</label>
-                                <InputMask mask="999.999.999-99" type="text" name="CPFbeneficiario" id="CPFbeneficiario"
-                                    placeholder="Digite o CPF"
-                                    value={cpf}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(6)} />
+                            <div style={{ display: "flex" }}>
+                                <div className="mb-3 m-1 form-group">
+                                    <label className="form-label" htmlFor="sexo">Sexo:</label><br />
+                                    <input type="text" name="sexo" id="sexo" placeholder="Digite o sexo "
+                                        value={sexo}
+                                        onChange={changeHandler}
+                                        onClick={e => setPosicao(8)} />
+                                </div>
+
+                                <div className="mb-3 m-1 form-group">
+                                    <label className="form-label" htmlFor="nis">NIS(CAD ÚNICO)</label><br />
+                                    <input style={{ width: 420 }} type="text" name="nis" id="nis" placeholder="Digite o NIS"
+                                        value={nis}
+                                        onChange={changeHandler}
+                                        onClick={e => setPosicao(9)} />
+                                </div>
                             </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="RGbeneficiario">RG Beneficiário:</label>
-                                <InputMask mask="99.999.999-99" type="text" name="RGbeneficiario" id="RGbeneficiario" placeholder="Digite o RG"
-                                    value={rg}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(7)} />
-                            </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="sexo">Sexo:</label><br />
-                                <input type="text" name="sexo" id="sexo" placeholder="Digite o sexo "
-                                    value={sexo}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(8)} />
-                            </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="nis">NIS(CAD ÚNICO)</label>
-                                <input type="text" name="nis" id="nis" placeholder="Digite o NIS"
-                                    value={nis}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(9)} />
-                            </div>
+
                         </div>
 
                         <div className="row">
-                            <div className="mb-3" >
+                            <div className="mb-3 m-1 form-group" >
                                 <label htmlFor="endereco">Endereço:</label><br />
-                                <input type="text" name="endereco" id="endereco" placeholder="Digite o endereço"
+                                <input style={{ width: 610 }} type="text" name="endereco" id="endereco" placeholder="Digite o endereço"
                                     value={endereco}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(10)} />
                             </div>
 
-                            <div className="mb-3">
+                            <div className="mb-3 m-1 form-group">
                                 <label htmlFor="bairro" >Bairro:</label>
-                                <input type="text" name="bairro" id="bairro" placeholder="Digite o bairro"
+                                <input style={{ width: 610 }} type="text" name="bairro" id="bairro" placeholder="Digite o bairro"
                                     value={bairro}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(12)} />
                             </div >
 
-                            <div className="mb-3">
+                            <div className="mb-3 m-1 form-group">
                                 <label htmlFor="referencia">Ponto de Referência:</label><br />
-                                <input type="text" name="referencia" id="referencia" placeholder="Digite o ponto de referência"
+                                <input style={{ width: 610 }} type="text" name="referencia" id="referencia" placeholder="Digite o ponto de referência"
                                     value={pontoReferencia}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(13)} />
                             </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="periodoRelfe">Período no Relfe:</label>
-                                <input type="text" name="periodoRelfe" id="periodoRelfe" placeholder="Período no Relfe"
-                                    value={periodoRelfe}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(5)} />
-                            </div>
+                            <div style={{ display: "flex" }}>
+                                <div>
+                                    <div className="mb-6 m-1 form-group">
+                                        <label htmlFor="periodoRelfe">Período no Relfe:</label><br />
+                                        <input style={{ width: 400 }} type="text" name="periodoRelfe" id="periodoRelfe" placeholder="Período no Relfe"
+                                            value={periodoRelfe}
+                                            onChange={changeHandler}
+                                            onClick={e => setPosicao(5)} />
+                                    </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="telContato">Telefone 1:</label>
-                                <InputMask mask="99)9-9999-9999" type="text" name="telContato" id="telContato" placeholder="Digite o telefone"
-                                    value={telefone1}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(14)} />
-                            </div>
+                                    <div className="mb-6 m-1 form-group">
+                                        <label htmlFor="telContato">Telefone 1:</label><br />
+                                        <InputMask mask="99)9-9999-9999" type="text" name="telContato" id="telContato" placeholder="Digite o telefone"
+                                            value={telefone1}
+                                            onChange={changeHandler}
+                                            onClick={e => setPosicao(14)} />
+                                    </div>
+                                </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="telContato2">Telefone 2:</label>
-                                <InputMask mask="99)9-9999-9999" type="text" name="telContato2" id="telContato2" placeholder="Digite o telefone"
-                                    value={telefone2}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(15)} />
-                            </div>
+                                <div>
+                                    <div className="mb-6 m-1 form-group">
+                                        <label htmlFor="telContato2">Telefone 2:</label><br />
+                                        <InputMask mask="99)9-9999-9999" type="text" name="telContato2" id="telContato2" placeholder="Digite o telefone"
+                                            value={telefone2}
+                                            onChange={changeHandler}
+                                            onClick={e => setPosicao(15)} />
+                                    </div>
 
-                            <div className="mb-3">
-                                <label htmlFor="telefone-recado">Telefone Recado:</label>
-                                <InputMask mask="99)9-9999-9999" type="text" name="telfone-recado" id="telefone-recado" placeholder="Telefone para recado"
-                                    value={telFoneRec}
-                                    onChange={changeHandler}
-                                    onClick={e => setPosicao(4)} />
+                                    <div className="mb-6 m-1 form-group">
+                                        <label htmlFor="telefone-recado">Telefone Recado:</label><br />
+                                        <InputMask mask="99)9-9999-9999" type="text" name="telfone-recado" id="telefone-recado" placeholder="Telefone para recado"
+                                            value={telFoneRec}
+                                            onChange={changeHandler}
+                                            onClick={e => setPosicao(4)} />
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -467,103 +488,123 @@ const Form: React.FC = () => {
                         <legend>Filiação / Responsável Legal</legend>
 
                         <fieldset className="mb-3">
-                            <label htmlFor="nomePai">Nome do Pai:</label>
-                            <input type="text" name="nomePai" id="nomePai" placeholder="Digite o nome do pai"
-                                value={nomePai}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(19)} />
+                            <div className="mb-10 form-group">
+                                <label className="form-label" htmlFor="nomePai">Nome do Pai:</label>
+                                <input className="form-control" type="text" name="nomePai" id="nomePai" placeholder="Digite o nome do pai"
+                                    value={nomePai}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(19)} />
+                            </div>
                         </fieldset>
 
 
                         <fieldset className="mb-3">
-                            <label htmlFor="nomeMae">Nome da Mãe:</label>
-                            <input type="text" name="nomeMae" id="nomeMae" placeholder="Digite o nome da mãe"
-                                value={nomeMae}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(20)} />
+                            <div className="mb-10 form-group">
+                                <label className="form-label" htmlFor="nomeMae">Nome da Mãe:</label>
+                                <input className="form-control" type="text" name="nomeMae" id="nomeMae" placeholder="Digite o nome da mãe"
+                                    value={nomeMae}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(20)} />
+                            </div>
                         </fieldset>
 
                         <fieldset className="mb-3">
-                            <label htmlFor="nomeResponsavel">Responsável Legal:</label>
-                            <input type="text" name="nomeResponsavel" id="nomeResponsavel" placeholder="Digite o nome do responsalvel"
-                                value={nomeResponsavel}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(21)}
-                            />
-                        </fieldset>
+                            <div className="mb-10 form-group">
+                                <label className="form-label" htmlFor="nomeResponsavel">Responsável Legal:</label>
+                                <input className="form-control" type="text" name="nomeResponsavel" id="nomeResponsavel" placeholder="Digite o nome do responsalvel"
+                                    value={nomeResponsavel}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(21)}
+                                />
+                            </div>
+                            <br />
 
-                        <fieldset className="mb-3">
-                            <label htmlFor="parentesco">Parentesco:</label>
-                            <input type="text" name="parentesco" id="parentesco" placeholder="Digite o parentesco"
-                                value={parentesco}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(22)}
-                            />
+                            <div className="mb-10 form-group">
+                                <label className="form-label" htmlFor="parentesco">Parentesco:</label><br />
+                                <input type="text" name="parentesco" id="parentesco" placeholder="Digite o parentesco"
+                                    value={parentesco}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(22)}
+                                />
+                            </div>
                         </fieldset>
 
                     </fieldset>
 
                     <fieldset>
                         <legend>Histórico Escolar</legend>
-                        <div>
-                            <div className="mb-3">
-                                <label className="form-label" htmlFor="escola">Escola:</label>
-                                <input type="text" name="escola" id="escola"
+                        <div style={{ display: "flex" }}>
+                            <div className="mb-3 form-group m-1">
+                                <label className="form-label" htmlFor="escola">Escola:</label><br />
+                                <input style={{ width: 300 }} type="text" name="escola" id="escola"
                                     placeholder="Nome da escola"
                                     value={escola}
                                     onChange={changeHandler}
                                     onClick={e => setPosicao(2)} />
                             </div>
-                            <div className="mb-3">
-                                <label className="form-label" htmlFor="periodo">Período da Escola:</label>
-                                <input type="number" name="periodo" id="periodo"
+                            <div className="mb-3 form-group m-1">
+                                <label className="form-label" htmlFor="periodo">Período da Escola:</label><br />
+                                <input style={{ width: 300 }} type="number" name="periodo" id="periodo"
                                     placeholder="Periodo da escola"
                                     value={periodoEscola}
                                     onChange={changeHandler}
                                     onClick={() => setPosicao(1)} />
                             </div>
                         </div>
-                        <div className="mb-3">
-                            <label htmlFor="serie">Série:</label>
-                            <input type="text" name="serie" id="serie" placeholder="Digite a série"
-                                value={serie}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(16)} />
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="ano">Ano:</label><br />
-                            <input type="number" name="ano" id="ano" placeholder="Digite o ano"
-                                value={ano}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(11)} />
+                        <div style={{ display: "flex" }}>
+                            <div className="mb-3 form-group m-1">
+                                <label htmlFor="serie">Série:</label><br />
+                                <input style={{ width: 300 }} type="text" name="serie" id="serie" placeholder="Digite a série"
+                                    value={serie}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(16)} />
+                            </div>
+                            <div className="mb-3 form-group m-1">
+                                <label htmlFor="ano">Ano:</label><br />
+                                <input style={{ width: 300 }} type="number" name="ano" id="ano" placeholder="Digite o ano"
+                                    value={ano}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(11)} />
+                            </div>
                         </div>
                     </fieldset>
 
                     <fieldset>
                         <legend>Relato de Desligamento</legend>
-                        <div className="mb-3">
-                            <label htmlFor="dataDesligamento">Data de Desligamento</label> <br />
-                            <input type="date" name="dataDesligamento" id="dataDesligamento"
-                                value={dataDesligamento}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(17)} />
-                            <label htmlFor="obs">OBS:</label>
-                            <input type="text" name="obs" id="obs"
-                                value={obs}
-                                onChange={changeHandler}
-                                onClick={e => setPosicao(18)}
-                                placeholder="Digite a observação do desligamento" />
+                        <div style={{ justifyContent:"center" }}>
+                            <div className="mb-3 form-group m-1">
+                                <label htmlFor="dataDesligamento">Data de Desligamento</label> <br />
+                                <input type="date" name="dataDesligamento" id="dataDesligamento"
+                                    value={dataDesligamento}
+                                    onChange={changeHandler}
+                                    onClick={e => setPosicao(17)} />
+
+                            </div>
+                            <div className="mb-3 form-group" style={{margin:10}}>
+                                <label htmlFor="obs">OBS:</label><br />
+                                <FormGroup>
+
+                                    <Input type="textarea"
+                                        name="obs" id="obs"
+                                        value={obs}
+                                        onChange={changeHandler}
+                                        onClick={e => setPosicao(18)}
+                                        placeholder="Digite a observação do desligamento"
+                                        style={{width:"100%", height:200}} />
+                                </FormGroup>
+                                
+                            </div>
                         </div>
                     </fieldset>
-                    <div style={{ display: "flex", justifyContent: "center" }}>salveEdit
+                    <div style={{ display: "flex", justifyContent: "center" }}>
                         {quemChamou === 'CA' ?
-                            <button type="submit" className="btn btn-success m-3"
+                            <button type="submit" className="btn btn-success m-4 btn-ajuste"
 
                             >Cadastrar</button>
                             :
-                            <button className="btn btn-success m-3" onClick={() => salveEdit()}>Salvar Edição</button>
+                            <button className="btn btn-success m-4 btn-ajuste" onClick={() => salveEdit()}>Salvar Edição</button>
                         }
-                        <button className="btn btn-danger  m-3" onClick={() => push("/")}>Cancelar</button>
+                        <button className="btn btn-danger  m-4 btn-ajuste" onClick={() => push("/")}>Cancelar</button>
 
                     </div>
                 </form>

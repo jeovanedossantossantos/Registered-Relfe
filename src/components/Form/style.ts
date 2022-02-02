@@ -6,7 +6,7 @@ export const Container = styled.div`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 100%
+    font-size: 100%;
     color: #040004;
     line-height: 1.5;
 }
@@ -46,4 +46,12 @@ legend{
     font-weight: bold;
     font-family: Verdana;
 }
+
+.btn-ajuste{
+    padding: 10px;
+    width: 200px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
 `
