@@ -1,5 +1,32 @@
 # Iniciando e configurando projeto 
 
+<h2>Objetivo do projeto</h2>
+
+<p>Criar um sitema de cadastro de criaçãs, onde constara os dados 
+mais importantes para indentificala.
+</p>
+
+# Itens
+<ol>
+<li>[x] Home
+<p>Onde possui dois botões, cadastre  e lista de matriculados</p>
+</li>
+<li>[x] Cadastre 
+  <p>Redireciona para o formulario de cadastro</p>
+</li>
+<li>[x] Lista de matriculados
+<p>Onde listara todas as crianças matriculadas na ong e para ver os detalhes em cada
+registro tem um botão de Editar que ao clicar sera redirecionado para a pagina de 
+edição de formulario</p>
+</li>
+
+</ol>
+
+# Ferramenta Usadas
+
+<p>Para o desenvolvimeto da aplicação, foi usa uma api chamada <a href="https://sheetdb.io/">sheetdb</a> que basucamente faz conexão com uma planilha da execl do google, foi usado tambem o ReactJs com o TypeScript, boostrap, reactstrap, e os modulos que estão abaixo...
+</p>
+
 <ol>
     <li>npx create-react-app screlfe</li>
     <li>yarn</li>
@@ -36,3 +63,15 @@
    <li>yarn add @types/jquery --save</li>
 
 </ol>
+
+# Hospedagem 
+
+<p>O sistema foi hospedado na platarfomra heroku de forma gratuita
+ e seu dominio fico o padrão que a platarfoma disponibilza</p>
+
+# Onde posso ver?
+
+<p>Experimete o sistema acessando por esse link: <a href="https://registered-relfe.herokuapp.com/">Clique aqui</a></p>
+
+<p>Lembrando que esse sistema é apenas uma amostra do original, já que o original seu link não 
+sera divulgado</p>
