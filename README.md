@@ -63,7 +63,7 @@
 
 # Hospedagem 
 
-<p>O sistema foi hospedado na plataforma heroku de forma gratuita e seu domínio fico o padrão que a plataforma disponibiliza.
+<p>O sistema foi hospedado na plataforma vercel de forma gratuita e seu domínio fico o padrão que a plataforma disponibiliza.
 Lembrando que esse sistema é apenas uma amostra do original, já que o original seu link não será divulgado.
 </p>
 
